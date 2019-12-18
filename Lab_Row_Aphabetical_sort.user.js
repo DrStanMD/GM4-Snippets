@@ -179,6 +179,7 @@ function getMeasures(measure, arrayno) {
       //alert(x.substring(19,25))
       if(x.substring(19,25)=="N</td>" || x.substring(19,25)==null || x.substring(19,25)=="A</td>"){ 
       var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
+      var xx = myRe.exec(str) //makes it work somehow
       //alert(myRe.exec(str))
       }
      
