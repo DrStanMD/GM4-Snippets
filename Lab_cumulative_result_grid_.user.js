@@ -218,3 +218,4 @@ function getMeasures(measure) {
   // alert(xmlhttp.onreadystatechange)
   xmlhttp.send();
 }
+
