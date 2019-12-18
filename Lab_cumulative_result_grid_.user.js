@@ -4,7 +4,7 @@
 // @include     *lab/CA/ALL/labDisplay.jsp?segmentID*
 // @include     *lab/CA/ALL/labDisplay.jsp?demographicId*
 // @require   http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js
-// @version     15.1
+// @version     15.2
 // @grant       none
 // ==/UserScript==
 //========Get Path============
