@@ -202,8 +202,8 @@ function getMeasures(measure) {
         r++
       }
     }
-    //measureArray.reverse()
-    //measureDateArray.reverse()
+    measureArray.reverse()
+    measureDateArray.reverse()
     alldata[ii] = '<u>' + abrLabName + '</u>' + ':' + '<br>' 
     //*************Limit to 10 results**********************
     vlimit = 10
