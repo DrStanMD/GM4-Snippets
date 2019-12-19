@@ -202,8 +202,8 @@ function getMeasures(measure, arrayno) {
         r++
       }
     
-      measureArray.reverse()
-      measureDateArray.reverse()
+      //measureArray.reverse()
+      //measureDateArray.reverse()
       alldata[arrayno] = '<br><u>' + measure + '</u>' + '<br>' //*************Limit to 10 results**********************
       vlimit = 10
       if (measureArray.length < vlimit) {
