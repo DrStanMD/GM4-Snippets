@@ -171,19 +171,21 @@ function getMeasures(measure, arrayno) {
       ]
       measureDateArray = [
       ]
-      //var myRe = /<td align="right">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
-      var myRe = /<td align="center">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
+      var myRe = /<td align="right">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
+      //var myRe = /<td align="center">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
       var myRe2 = /<td align="center">(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})<\/td>/g; //the observation date
 
       var q = myRe.exec(str).toString()
       var res = myRe.exec(str)
       
       if(!isNaN(res)){
-      var myRe = /<td align="center">(\D+?)<\/td>/g; //for the measurement non-numeric
+      //var myRe = /<td align="center">(\D+?)<\/td>/g; //for the measurement non-numeric
+      var myRe = /<td align="right">(\D+?)<\/td>/g; //for the measurement non-numeric
       }
 
       if(isNaN(res)){
-      var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
+      //var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
+      var myRe = /<td align="right">([\d,\.]+)<\/td>/g; //for the measurement numeric
       }
       
       var r = 0
