@@ -164,46 +164,45 @@ function getMeasures(measure, arrayno) {
   str = ''
   var pathArray = window.location.pathname.split('/');
   var newURL = window.location.protocol + '//' + window.location.host + '/' + pathArray[1] + '/lab/CA/ON/labValues.jsp?' + labURL
-    xmlhttp.onreadystatechange = function () {
+  xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var str = xmlhttp.responseText; //local variable
-      if (!str) {
-      }
       measureArray = [
       ]
       measureDateArray = [
       ]
-
-      var myRe = /<td align="center">([\D]+)<\/td>/g; //for the measurement non-numeric
-      var x = (myRe.exec(str)).toString()
-      //alert(x.substring(19,25))
-      if(x.substring(19,25)=="N</td>" || x.substring(19,25)==null || x.substring(19,25)=="A</td>"){ 
-      var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
-      var xx = myRe.exec(str) //makes it work somehow
-      //alert(myRe.exec(str))
-      }
-     
+      //var myRe = /<td align="right">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
+      var myRe = /<td align="center">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
       var myRe2 = /<td align="center">(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})<\/td>/g; //the observation date
+
+      var q = myRe.exec(str).toString()
+      var res = myRe.exec(str)
+      
+      if(!isNaN(res)){
+      var myRe = /<td align="center">(\D+?)<\/td>/g; //for the measurement non-numeric
+      }
+
+      if(isNaN(res)){
+      var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
+      }
+      
       var r = 0
       var myArray;
-      //alert(str)
-      //alert(myRe.exec(str))
-      var xx = myRe.exec(str) //makes it work somehow
-      while ((myArray= myRe.exec(str)) !== null) {
-        //alert(myArray[0])
+      //var xx = myRe.exec(str) //makes it work somehow
+      while ((myArray = myRe.exec(str)) !== null) {
         pend = myArray[0].indexOf('</td>')
         measureArray[r] = '<b>' + myArray[0].substring(19, pend) + '</b>'
+        //alert(measureArray[r])
         r++
       }
       var r = 0
-      var myArray2;
-      while ((myArray2 = myRe2.exec(str)) !== null) {
-        measureDateArray[r] = '<u>' + myArray2[0].substring(19, 29) + '</u>'
+      var myArray;
+      while ((myArray = myRe2.exec(str)) !== null) {
+        measureDateArray[r] = '<u>' + myArray[0].substring(19, 29) + '</u>'
         r++
       }
-    
-      measureArray.reverse()
-      measureDateArray.reverse()
+     //measureArray.reverse()
+     // measureDateArray.reverse()
       alldata[arrayno] = '<br><u>' + measure + '</u>' + '<br>' //*************Limit to 10 results**********************
       vlimit = 10
       if (measureArray.length < vlimit) {
@@ -508,4 +507,3 @@ function CCBox() {
     }
   }
 }
-
