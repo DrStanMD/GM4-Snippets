@@ -6,11 +6,14 @@
 // @description Lab Grid Alphabetical Sort
 // @require http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js
 // @grant       none
-// @version     15.2
+// @version     15.3
 // ==/UserScript==
 //========Get Path============
 
 var formID='414' //  ENTER YOUR SPECIFIC POPUPWINDOW FORM ID NUMBER HERE
+var elements = (window.location.pathname.split('/', 2))
+firstElement = (elements.slice(1))
+var vPath = ('https://' + location.host + '/' + firstElement + '/')
 
 //===============================
 var mylink = 'eform/efmshowform_data.jsp?fid='+formID
@@ -171,30 +174,44 @@ function getMeasures(measure, arrayno) {
       ]
       measureDateArray = [
       ]
-      var myRe = /<td align="right">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
-      //var myRe = /<td align="center">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
+      //var myRe = /<td align="right">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
+      var myRe = /<td align="center">(.*?)([\d,\.]+)<\/td>/g; //for the measurement
       var myRe2 = /<td align="center">(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})<\/td>/g; //the observation date
 
       var q = myRe.exec(str).toString()
       var res = myRe.exec(str)
+      //alert(res)
       
       if(!isNaN(res)){
-      //var myRe = /<td align="center">(\D+?)<\/td>/g; //for the measurement non-numeric
-      var myRe = /<td align="right">(\D+)<\/td>/g; //for the measurement non-numeric
+      var myRe = /<td align="center">(\D+)<\/td>/g; //for the measurement non-numeric
+      //var myRe = /<td align="right">(\D+)<\/td>/g; //for the measurement non-numeric
       }
 
       if(isNaN(res)){
-      //var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
-      var myRe = /<td align="right">([\d,\.]+)<\/td>/g; //for the measurement numeric
+      var myRe = /<td align="center">([\d,\.]+)<\/td>/g; //for the measurement numeric
+      //var myRe = /<td align="right">([\d,\.]+)<\/td>/g; //for the measurement numeric  
       }
       
       var r = 0
       var myArray;
-      //var xx = myRe.exec(str) //makes it work somehow
+      
+        if(q.indexOf('<br />')>-1){ //for HIV result
+        //alert(q)
+        q = q.replace(/<br \/>/g,'');
+        //alert(q)
+        str = (q+'</td>').toString()     
+        //alert(str)
+        var myRe = /<td align="center">(\D+)<\/td>/g; //for the measurement non-numeric  
+        } 
+      
       while ((myArray = myRe.exec(str)) !== null) {
         pend = myArray[0].indexOf('</td>')
         measureArray[r] = '<b>' + myArray[0].substring(19, pend) + '</b>'
-        //alert(measureArray[r])
+        /*
+        if(measureArray[r]=="<b>A</b>" || measureArray[r]=="<b></b>"){
+        alert(measureArray[r])
+          ((myArray = myRe.exec(str)) !== null) == false
+        }*/
         r++
       }
       var r = 0
@@ -363,9 +380,7 @@ document.body.appendChild(input2);
 function showAlert2() {
   myDisplay()
 }
-var elements = (window.location.pathname.split('/', 2))
-firstElement = (elements.slice(1))
-vPath = ('https://' + location.host + '/' + firstElement + '/') //=====Get Parameters============
+ //=====Get Parameters============
 var params = {
 };
 if (location.search) {
@@ -467,20 +482,20 @@ function CCBox() {
         q.checked = false;
       } //*****************
 
+      qq = document.getElementById('CBC')
+      if (CBCArray.indexOf(q.value) > - 1 && qq.checked == true) {
+        q.checked = true;
+      } 
+      else if (CBCArray.indexOf(q.value) > - 1 && qq.checked == false) {
+        q.checked = false;
+      } //*****************
+      
       q = document.getElementById(('myCheckBox' + i))
       qq = document.getElementById('CDM')
       if (CDMArray.indexOf(q.value) > - 1 && qq.checked == true) {
         q.checked = true;
       } 
       else if (CDMArray.indexOf(q.value) > - 1 && qq.checked == false) {
-        q.checked = false;
-      } //*****************
-
-      qq = document.getElementById('CBC')
-      if (CBCArray.indexOf(q.value) > - 1 && qq.checked == true) {
-        q.checked = true;
-      } 
-      else if (CBCArray.indexOf(q.value) > - 1 && qq.checked == false) {
         q.checked = false;
       } //*****************
 
