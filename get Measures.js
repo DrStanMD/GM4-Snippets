@@ -14,10 +14,19 @@ if (!myParam) {
     //alert(demo_no)
 }
 
+//Remove all white space
 var demoArray = [
-    'FirstName',
-    'LastName',
-    'Email'
+  'FirstName',
+  'LastName',
+  'Email',
+  'CellPhone',
+  'Email',
+  'Phone(H)',
+  'Address',
+  'City',
+  'Postal',
+  'Age',
+  'HealthIns'
 ]
 
 var demoArrayVal = []
@@ -31,7 +40,7 @@ function getMeasures(measure) {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             //alert(xmlhttp.responseText)
-            var str = xmlhttp.responseText.replace(/\s/g, '')
+            var str = xmlhttp.responseText.replace(/\s/g, '')  //remove all white space
             //var str = xmlhttp.responseText
             if (!str) {
                 return;
