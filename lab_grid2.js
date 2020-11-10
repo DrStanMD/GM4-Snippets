@@ -1,7 +1,6 @@
 var elements = (window.location.pathname.split('/', 2))
 firstElement = (elements.slice(1))
 vPath = ("https://" + location.host + "/" + firstElement)
-//alert(vPath)
 
 //get parameters
 var params = {};
@@ -13,9 +12,7 @@ if (location.search) {
         params[nv[0]] = nv[1] || true;
     }
 }
-//alert(params.type)
 
-var formPath = vPath + "/eform/efmshowform_data.jsp?fid=74&LabName="
 var measureArray = [];
 var measureDateArray = [];
 
@@ -50,14 +47,11 @@ function getMeasures(measure) {
     }
     xmlhttp.open("GET", newURL, false);
     xmlhttp.send();
-    //alert(this.patient_name.value)
     if (measureArray.length > 0) {
-        //myGraphWindow = "<a href=" + formPath + measure + "&GraphType=Bar" + "&mA=" + measureArray + "&mDA=" + measureDateArray + " target='_blank'>" + measure + ": " + "</a>"
-       myGraphWindow = measure + ": "
+        myGraphWindow = measure + ": "
 
-       
- //myGraphWindow = formPath + measure + measureArray + measureDateArray + measure + ": "
-         doHtml("<font size='3'>"+myGraphWindow +"</font>");
+
+        doHtml("<font size='3'>" + myGraphWindow + "</font>");
         displaynum = measureArray.length
         if (measureArray.length > 20) {
             displaynum = 20
@@ -65,8 +59,8 @@ function getMeasures(measure) {
         for (jj = 0; jj < displaynum; jj++) {
             var d = new Date(measureDateArray[jj])
             var LabDate = "(" + d.getFullYear() + "/" + (d.getMonth() + 1) + "); "
-            doHtml("<font size='3'>"+measureArray[jj].bold()+ "</font>"+"<font size='2'>"+LabDate+ "</font>")
+            doHtml("<font size='3'>" + measureArray[jj].bold() + "</font>" + "<font size='2'>" + LabDate + "</font>")
         }
-           doHtml("<br></br>");
+        doHtml("<br></br>");
     }
 }
