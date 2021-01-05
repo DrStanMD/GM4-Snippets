@@ -1,0 +1,119 @@
+
+function algo() {
+    $('#inputForm').find(':input').each(function() {
+        //alert(this.title)
+
+        if (this.value == "X") {
+            //alert(this.title)
+            switch (this.title.split(".")[1]) {
+                case "0":
+                    this.title = "Q" + this.title.split(".")[0] + " = Would never doze "
+                    break;
+                case "1":
+                    this.title = "Q" + this.title.split(".")[0] + " = Slight chance of dozing"
+                    break;
+                case "2":
+                    this.title = "Q" + this.title.split(".")[0] + " = Moderate chance of dozing"
+                    break;
+                case "3":
+                    this.title = "Q" + this.title.split(".")[0] + " = High chance of dozing"
+                    break;
+                default:
+                    //alert(this.title)
+            }
+        }
+
+        //for the color bars
+        var g_bar = $("[title='green_bar']")
+        var o_bar = $("[title='orange_bar']")
+        var r_bar = $("[title='red_bar']")
+        
+        //reset color bars
+        g_bar.val(g_bar.val().toLowerCase());
+        var x =g_bar.val().substr(0,1).toUpperCase()
+        var y = g_bar.val().substr(1)
+        g_bar.val(x+y)
+
+        o_bar.val(o_bar.val().toLowerCase());
+        var x =o_bar.val().substr(0,1).toUpperCase()
+        var y = o_bar.val().substr(1)
+        o_bar.val(x+y)
+
+        r_bar.val(r_bar.val().toLowerCase());
+        var x =r_bar.val().substr(0,1).toUpperCase()
+        var y =r_bar.val().substr(1)
+        r_bar.val(x+y)
+
+        g_bar.css('background-color', 'white'); //reset background color
+        o_bar.css('background-color', 'white'); //reset background color
+        r_bar.css('background-color', 'white'); //reset background color
+        //end rest
+        
+        var scoreValue = $('#ScoreA').val()
+
+        switch (true) {
+            case (scoreValue <= 9):
+                g_bar.css('background-color', 'lightgreen');
+                g_bar.val(g_bar.val().toUpperCase());
+                break;
+            case (scoreValue >= 10 && scoreValue <= 11):
+                o_bar.css('background-color', 'orange');
+                o_bar.val(o_bar.val().toUpperCase());
+                break;
+            case (scoreValue >= 12):
+                r_bar.css('background-color', 'red');
+                r_bar.val(r_bar.val().toUpperCase());                
+                break;
+        }
+    })
+}
+
+function formSpecific(myvar) {
+    //alert(myvar.title)
+    //Reset id to default 
+    var myscore = 0
+    $('#inputForm').find(':input').each(function() {
+        $(this).css('border-color', 'black');
+        //this.name = this.id
+        x = allids.indexOf(this.id)
+        this.title = alltitles[x]
+        //alert(this.title)
+        if (this.value == "X") {
+            // $('#' + myvar.id).css('border-color', 'red');
+            myscore += parseInt(this.title.split(".")[1])
+        }
+    })
+    $('#ScoreA').val(" " + myscore)
+    algo()
+}
+</script>
+
+
+
+function formSpecific(myvar) {
+    //alert(myvar.title)
+    //Reset id to default 
+    var myscoreA = 0
+    var myscoreB = 0
+
+    $('#inputForm').find(':input').each(function() {
+        $(this).css('border-color', 'black');
+        //this.name = this.id
+        x = allids.indexOf(this.id)
+        this.title = alltitles[x]
+        //alert(this.title)
+        if (this.value == "X" && this.title.split(".")[2] == 1) {
+            //$('#' + myvar.id).css('border-color', 'red');
+             myscoreA += 1
+        } 
+        if (this.value == "X" && this.title.split(".")[2] == 2) {
+            //$('#' + myvar.id).css('border-color', 'red');
+            myscoreB += 1
+        } 
+    })
+   algo()
+   // alert("A score is: " + myscoreA + "  B score is: " + myscoreB)
+ $('#ScoreA').val(" "+myscoreA)
+ $('#ScoreB').val(" "+myscoreB)
+}
+</script>
