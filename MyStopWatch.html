@@ -9,7 +9,7 @@
 <body>
 
     <form method="post">
-        <input id="StartButton" onclick="StartTimer()" type="button" value="Start" />
+        <input id="StartButton" onclick="StartTimer()" type="button" value="Start" style="width: 74px" />
         <input id="StopButton" onclick="StopTimer()" type="button" value="Stop" />
         <input id="PauseButton" onclick="PauseTimer()" type="button" value="Pause" />
     </form>
@@ -21,9 +21,14 @@
     var mytimer
     var seconds1 = 0;
     var el = document.getElementById('seconds-counter');
+    document.getElementById("StartButton").style.background='lightgreen';
+    document.getElementById("StopButton").style.background='pink';
+    document.getElementById("PauseButton").style.background='lightgray';
 
     function StartTimer() {
         mytimer = setInterval(incrementSeconds, 1000);
+        document.getElementById("PauseButton").disabled = false;
+        document.getElementById("PauseButton").style.background='#fcde8b';
     }
 
     function PauseTimer() {
@@ -37,6 +42,8 @@
         alert(seconds1.toString().toHHMMSS());
         seconds1 = 0;
         document.getElementById("StartButton").value = "Start"
+        document.getElementById("PauseButton").disabled = true;
+        document.getElementById("PauseButton").style.background='lightgray';
         //el.innerText = (seconds1.toString().toHHMMSS());
     }
 
