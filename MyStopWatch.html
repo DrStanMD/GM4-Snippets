@@ -2,47 +2,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Untitled 1</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Untitled 1</title>
 </head>
 
 <body>
-<div id='seconds-counter'></div>
+
+    <form method="post">
+        <input id="StartButton" onclick="StartTimer()" type="button" value="Start" />
+        <input id="StopButton" onclick="StopTimer()" type="button" value="Stop" />
+        <input id="PauseButton" onclick="PauseTimer()" type="button" value="Pause" />
+    </form>
+    <div id="seconds-counter">
+    </div>
+
 </body>
-
 <script>
+    var mytimer
+    var seconds1 = 0;
+    var el = document.getElementById('seconds-counter');
 
-var seconds1 = 0;
-var el = document.getElementById('seconds-counter');
+    function StartTimer() {
+        mytimer = setInterval(incrementSeconds, 1000);
+    }
 
-function incrementSeconds() {
-    seconds1 += 1;   
-    el.innerText = ("You have been here for " + seconds1.toString().toHHMMSS() + " seconds.");
-    el.style.fontSize = "x-large"
-    el.style.fontWeight = "bold"
-    el.style.fontFamily = "arial";
+    function PauseTimer() {
+        clearInterval(mytimer);
+        alert(seconds1.toString().toHHMMSS());
+        document.getElementById("StartButton").value = "Resume"
+    }
 
-    //el.innerText = "You have been here for " + seconds1 + " seconds.";
-}
+    function StopTimer() {
+        clearInterval(mytimer);
+        alert(seconds1.toString().toHHMMSS());
+        seconds1 = 0;
+        document.getElementById("StartButton").value = "Start"
+        //el.innerText = (seconds1.toString().toHHMMSS());
+    }
 
-var start = setInterval(incrementSeconds, 1000);
+    function incrementSeconds() {
+        seconds1 += 1;
+        el.innerText = (seconds1.toString().toHHMMSS());
+        el.style.fontSize = "x-large"
+        el.style.fontWeight = "bold"
+        el.style.fontFamily = "arial";
+        //el.innerText = seconds1 + " seconds.";
+    }
 
-String.prototype.toHHMMSS = function () {
-    var sec_num = parseInt(this, 10); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    return hours + ':' + minutes + ':' + seconds;
-}
-    
-//alert(seconds1.toString().toHHMMSS());
+    String.prototype.toHHMMSS = function() {
+        var sec_num = parseInt(this, 10); // don't forget the second param
+        var hours = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        return hours + ':' + minutes + ':' + seconds;
+    }
+
+    //alert(seconds1.toString().toHHMMSS());
 </script>
-
-
 
 </html>
