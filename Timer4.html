@@ -3,9 +3,8 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <script src='https://code.jquery.com/jquery-1.12.4.js'>
+    <script src="https://code.jquery.com/jquery-1.12.4.js">
     </script>
-
     <title>Untitled 1</title>
 </head>
 
@@ -33,27 +32,37 @@
         var mytimer
         var seconds1 = 0;
         var num
+        //var SetPause = "off"
 
-        for (i = 3; i < 6; i++) {
+        for (i = 1; i < 4; i++) {
             document.getElementById("StartButton" + i).style.background = 'lightgreen';
             document.getElementById("StartButton" + i).title = i
             //elementArray[i] = this.id
             $('#StartButton' + i).click(function() {
                 StartTimer(this.title)
+                document.getElementById("StartButton" + this.title).style.background = 'lightgray';
+                document.getElementById("StartButton" + this.title).disabled = true;
             });
             document.getElementById("StopButton" + i).style.background = 'pink';
             document.getElementById("StopButton" + i).title = i
             $('#StopButton' + i).click(function() {
                 StopTimer(this.title)
+                document.getElementById("StartButton" + this.title).style.background = 'lightgreen';
+                document.getElementById("StartButton" + this.title).disabled = false;
             });
             document.getElementById("PauseButton" + i).style.background = 'lightgray';
             document.getElementById("PauseButton" + i).title = i
             $('#PauseButton' + i).click(function() {
                 PauseTimer(this.title)
+                document.getElementById("StartButton" + this.title).style.background = 'lightgreen';
+                document.getElementById("StartButton" + this.title).disabled = false;
+
             });
 
             function StartTimer(BN) {
                 //alert(BN)
+                //alert(SetPause)
+                clearInterval(mytimer);
                 num = BN
                 mytimer = setInterval(incrementSeconds, 1000);
                 document.getElementById("PauseButton" + BN).disabled = false;
@@ -62,8 +71,9 @@
             }
 
             function PauseTimer(BN) {
+                //SetPause = "on"
                 clearInterval(mytimer);
-                //-09alert(seconds1.toString().toHHMMSS());
+                //alert(seconds1.toString().toHHMMSS());
                 document.getElementById("StartButton" + BN).value = "Resume"
                 document.getElementById("PauseButton" + BN).disabled = true;
                 document.getElementById("PauseButton" + BN).style.background = 'lightgray';
@@ -71,6 +81,7 @@
             }
 
             function StopTimer(BN) {
+                //SetPause = "off"
                 clearInterval(mytimer);
                 //alert(seconds1.toString().toHHMMSS());
                 seconds1 = 0;
@@ -92,29 +103,27 @@
 
 
     }
+
     //********END TIMER
 </script>
 
 <body onload="initiateTimer()">
 
-    <div>
-        <input id="gen_inputIdTIMER3" name="gen_inputIdTIMER3" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
-        <input id="StartButton3" style="width: 74px" type="button" value="Start" onclick="StartTimer(this)" />
-        <input id="StopButton3" type="button" value="Stop" />
-        <input id="PauseButton3" type="button" value="Pause" />
-    </div>
-
+    <input id="gen_inputIdTIMER1" class="gen_input TextBox noborderPrint" name="gen_inputIdTIMER1" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
+    <input id="StartButton1" style="width: 74px" type="button" value="Start" />
+    <input id="StopButton1" type="button" value="Stop" />
+    <input id="PauseButton1" type="button" value="Pause" />
     <p>
-        <input id="gen_inputIdTIMER4" name="gen_inputIdTIMER4" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
-        <input id="StartButton4" style="width: 74px" type="button" value="Start" />
-        <input id="StopButton4" type="button" value="Stop" />
-        <input id="PauseButton4" type="button" value="Pause" />
+        <input id="gen_inputIdTIMER2" class="gen_input TextBox noborderPrint" name="gen_inputIdTIMER2" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
+        <input id="StartButton2" style="width: 74px" type="button" value="Start" />
+        <input id="StopButton2" type="button" value="Stop" />
+        <input id="PauseButton2" type="button" value="Pause" />
     </p>
     <p>
-        <input id="gen_inputIdTIMER5" name="gen_inputIdTIMER5" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
-        <input id="StartButton5" style="width: 74px" type="button" value="Start" />
-        <input id="StopButton5" type="button" value="Stop" />
-        <input id="PauseButton5" type="button" value="Pause" />
+        <input id="gen_inputIdTIMER3" class="gen_input TextBox noborderPrint" name="gen_inputIdTIMER3" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
+        <input id="StartButton3" style="width: 74px" type="button" value="Start" />
+        <input id="StopButton3" type="button" value="Stop" />
+        <input id="PauseButton3" type="button" value="Pause" />
     </p>
 
 </body>
