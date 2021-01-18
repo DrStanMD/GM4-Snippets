@@ -62,6 +62,12 @@
             function StartTimer(BN) {
                 //alert(BN)
                 //alert(SetPause)
+                $('*[id*=StartButton]').prop("disabled", true);
+                $('*[id*=StartButton]').css("background-color", "lightgray");
+                document.getElementById("StartButton" + BN).disabled = false;
+                document.getElementById("StartButton" + BN).style.background = 'lightgray';
+                document.getElementById("StopButton" + BN).disabled = false;
+                document.getElementById("StopButton" + BN).style.background = 'lightgreen';
                 clearInterval(mytimer);
                 num = BN
                 mytimer = setInterval(incrementSeconds, 1000);
@@ -82,6 +88,11 @@
 
             function StopTimer(BN) {
                 //SetPause = "off"
+                $('*[id*=StartButton]').prop("disabled", false);
+                $('*[id*=StartButton]').css("background-color", "lightgreen");
+
+                document.getElementById("StopButton" + BN).disabled = true;
+                document.getElementById("StopButton" + BN).style.background = 'lightgray';
                 clearInterval(mytimer);
                 //alert(seconds1.toString().toHHMMSS());
                 seconds1 = 0;
