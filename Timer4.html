@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <script src='https://code.jquery.com/jquery-1.12.4.js'>
+    </script>
+
+    <title>Untitled 1</title>
+</head>
+
+<script>
+    function initiateTimer() {
+
+        String.prototype.toHHMMSS = function() {
+            var sec_num = parseInt(this, 10); // don't forget the second param
+            var hours = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+            return hours + ':' + minutes + ':' + seconds;
+        }
+
+        var mytimer
+        var seconds1 = 0;
+        var num
+
+        for (i = 3; i < 6; i++) {
+            document.getElementById("StartButton" + i).style.background = 'lightgreen';
+            document.getElementById("StartButton" + i).title = i
+            //elementArray[i] = this.id
+            $('#StartButton' + i).click(function() {
+                StartTimer(this.title)
+            });
+            document.getElementById("StopButton" + i).style.background = 'pink';
+            document.getElementById("StopButton" + i).title = i
+            $('#StopButton' + i).click(function() {
+                StopTimer(this.title)
+            });
+            document.getElementById("PauseButton" + i).style.background = 'lightgray';
+            document.getElementById("PauseButton" + i).title = i
+            $('#PauseButton' + i).click(function() {
+                PauseTimer(this.title)
+            });
+
+            function StartTimer(BN) {
+                //alert(BN)
+                num = BN
+                mytimer = setInterval(incrementSeconds, 1000);
+                document.getElementById("PauseButton" + BN).disabled = false;
+                document.getElementById("PauseButton" + BN).style.background = '#fcde8b';
+
+            }
+
+            function PauseTimer(BN) {
+                clearInterval(mytimer);
+                //-09alert(seconds1.toString().toHHMMSS());
+                document.getElementById("StartButton" + BN).value = "Resume"
+                document.getElementById("PauseButton" + BN).disabled = true;
+                document.getElementById("PauseButton" + BN).style.background = 'lightgray';
+
+            }
+
+            function StopTimer(BN) {
+                clearInterval(mytimer);
+                //alert(seconds1.toString().toHHMMSS());
+                seconds1 = 0;
+                document.getElementById("StartButton" + BN).value = "Start"
+                document.getElementById("PauseButton" + BN).disabled = true;
+                document.getElementById("PauseButton" + BN).style.background = 'lightgray';
+            }
+        }
+
+        function incrementSeconds() {
+            seconds1 += 1;
+            el = document.getElementById('gen_inputIdTIMER' + num)
+            el.value = (seconds1.toString().toHHMMSS());
+            el.style.fontSize = "large";
+            el.style.fontWeight = "bold";
+            el.style.fontFamily = "arial";
+
+        }
+
+
+    }
+    //********END TIMER
+</script>
+
+<body onload="initiateTimer()">
+
+    <div>
+        <input id="gen_inputIdTIMER3" name="gen_inputIdTIMER3" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
+        <input id="StartButton3" style="width: 74px" type="button" value="Start" onclick="StartTimer(this)" />
+        <input id="StopButton3" type="button" value="Stop" />
+        <input id="PauseButton3" type="button" value="Pause" />
+    </div>
+
+    <p>
+        <input id="gen_inputIdTIMER4" name="gen_inputIdTIMER4" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
+        <input id="StartButton4" style="width: 74px" type="button" value="Start" />
+        <input id="StopButton4" type="button" value="Stop" />
+        <input id="PauseButton4" type="button" value="Pause" />
+    </p>
+    <p>
+        <input id="gen_inputIdTIMER5" name="gen_inputIdTIMER5" style="width: 80px; height: 30px;" title="Timer" type="text" /><br />
+        <input id="StartButton5" style="width: 74px" type="button" value="Start" />
+        <input id="StopButton5" type="button" value="Stop" />
+        <input id="PauseButton5" type="button" value="Pause" />
+    </p>
+
+</body>
+
+</html>
