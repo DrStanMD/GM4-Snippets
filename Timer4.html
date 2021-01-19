@@ -43,7 +43,8 @@
                 document.getElementById("StartButton" + this.title).style.background = 'lightgray';
                 document.getElementById("StartButton" + this.title).disabled = true;
             });
-            document.getElementById("StopButton" + i).style.background = 'pink';
+            document.getElementById("StopButton" + i).style.background = 'lightgray';
+            document.getElementById("StopButton" + i).disabled = true;
             document.getElementById("StopButton" + i).title = i
             $('#StopButton' + i).click(function() {
                 StopTimer(this.title)
@@ -67,7 +68,7 @@
                 document.getElementById("StartButton" + BN).disabled = false;
                 document.getElementById("StartButton" + BN).style.background = 'lightgray';
                 document.getElementById("StopButton" + BN).disabled = false;
-                document.getElementById("StopButton" + BN).style.background = 'lightgreen';
+                document.getElementById("StopButton" + BN).style.background = 'pink';
                 clearInterval(mytimer);
                 num = BN
                 mytimer = setInterval(incrementSeconds, 1000);
